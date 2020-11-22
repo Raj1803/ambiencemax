@@ -1,20 +1,61 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+  <ion-toolbar class="grad">
+    <img slot="start"
+      src="../assets/Logo.svg"
+      width="100"
+      height="30"
+      alt=""
+    />
+    <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="bgimg">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="card">
+    <ion-card id="login-container">
+
+      
+      <ion-card-header>
+        <div class="center">
+        <h6 style="color: white;">Welcome to AmbienceMax</h6>
+        </div>
+      </ion-card-header>
+
+      
+    
+      <ion-card-content>
+        <ion-label style="color: white;">Email:</ion-label>
+        <ion-item id="item">
+          
+          <ion-input type="email" name="email" [(ngModel)] = 'email' required></ion-input>
+
+        </ion-item>
+
+        <ion-text>
+          <small id="emailhelp">We'll never share your email with anyone else.</small>
+        </ion-text>
+
+        <br>
+
+        <ion-label style="color: white;">Password:</ion-label>
+        <ion-item id="item">
+          
+          <ion-input type="password" name="password" [(ngModel)] = 'password' required></ion-input>
+        </ion-item>
+
+        <hr style="color: thistle;">
+
+        <div class="center">
+        <ion-button color="danger" id="button_margin" (click)="onLogin()">Login</ion-button>
+      </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

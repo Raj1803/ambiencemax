@@ -1,3 +1,25 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="dashboard" content-id="dashboard">
+    
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle>
+        <ion-item routerLink="/dashboard" style="color: white;">Dashboard</ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="/add-req" style="color: white;">New Request</ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item  routerLink="/all-request" style="color: white;">All Requests</ion-item>
+      </ion-menu-toggle>
+      
+      <ion-item style="color: white;">Pending Requests</ion-item>
+      <ion-item style="color: white;">Closed Requests</ion-item>
+      <ion-item style="color: white;">Logout</ion-item>
+    </ion-list> 
+  </ion-content>
+  
+  </ion-menu>
+
+  <ion-router-outlet id="dashboard"></ion-router-outlet>
 </ion-app>

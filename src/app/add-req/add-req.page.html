@@ -1,0 +1,139 @@
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+
+<ion-header [translucent]="true">
+  <ion-toolbar class="grad">
+
+    <ion-buttons slot="start" style="color: white;">
+      <ion-menu-button menu="dashboard"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bgimg">
+
+  <ion-card id="login-container">
+
+    <ion-card-header>
+      <div class="center">
+      <h6 style="color: white;">Request Form</h6>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <form 
+        ngNativeValidate #form = "ngForm" (ngSubmit) = "form.reset() "
+        action="#">
+
+      <div id="button_margin">
+      <label for="inputdes" style="color: white;">Request Type</label>
+
+      <br>
+      
+        <select name="RequestType" 
+          class="form-control"
+          [(ngModel)] = "currReq.req_type" required>
+          <option selected>Choose...</option>
+          <option>Request for new assets</option>
+          <option>Request for Repair </option>
+          <option>Request for Maintainance </option>
+          <option>Other </option>
+        </select> 
+      </div>
+
+      <div id="button_margin">
+        <label for="inputbudget" style="color: white;">Request Budget</label>
+
+    
+      <ion-item id="item">
+
+        <ion-input
+          type="number"
+          id="inputbudget"
+          class="form-control"
+          name="RequestBudget"
+          [(ngModel)] = "currReq.req_budget"
+          required >
+        </ion-input>
+
+      </ion-item>
+      </div>
+
+      <div id="button_margin">
+
+        <label for="inputid" style="color: white;" >Requester ID</label>
+        <ion-item id="item">
+
+          <ion-input 
+            type="text"
+            id="inputid"
+            name="RequesterId"
+            class="form-control"
+            [(ngModel)] = "this.currReq.req_initiator_id"
+            #userId = "ngModel"
+            readonly
+            value="Readonly">
+          </ion-input>
+
+        </ion-item>
+        
+
+      </div>
+
+      <div id="button_margin">
+        
+        <label for="reqtitle" style="color: white;">Request Title</label>
+        
+        <ion-item id="item">
+
+          <ion-input
+            type="text"
+            class="form-control"
+            id="reqtitle"
+            placeholder=""
+            name="RequestTitle"
+            [(ngModel)] = "currReq.req_title"
+            required>
+          </ion-input>
+
+        </ion-item>
+        
+
+      </div>
+
+      <div id="button_margin">
+        <label for="reqdes" style="color: white;">Request Description</label>
+    
+        <ion-item id="item">
+
+          <ion-textarea
+            class="form-control"
+            id="reqdes"
+            placeholder=""
+            name="Requestdes"
+            [(ngModel)] = "currReq.req_description"
+            required>
+          </ion-textarea>
+
+        </ion-item>
+        
+      </div>
+
+      <div class="center">
+        <ion-button type="submit" color="danger"
+          class="btn btn-danger btn-lg" 
+          id="button_margin" (click) = "form.valid ? onSubmit() : null;" 
+          [disabled] = "!form.valid">Submit Request</ion-button>
+      </div>
+      
+      </form>
+
+    </ion-card-content>
+
+
+  </ion-card>
+
+</ion-content>

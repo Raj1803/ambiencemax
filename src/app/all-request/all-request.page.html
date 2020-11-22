@@ -1,0 +1,50 @@
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+
+<ion-header [translucent]="true">
+  <ion-toolbar class="grad">
+
+    <ion-buttons slot="start" style="color: white;">
+      <ion-menu-button menu="dashboard"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="bgimg">
+
+  <ion-row class="header-row">
+    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
+      Request Id
+    </ion-col>
+
+    <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;">
+      Request Title
+    </ion-col>  
+
+    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
+      Requester Id
+    </ion-col> 
+
+
+  </ion-row>
+
+  <ion-row *ngFor="let row of dataSource; let i = index;">
+
+    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
+      
+    </ion-col>
+
+    <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;">
+      Request Title
+    </ion-col>  
+
+    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
+      Requester Id
+    </ion-col> 
+
+  </ion-row>
+
+</ion-content>
