@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'all-request',
     loadChildren: () => import('./all-request/all-request.module').then( m => m.AllRequestPageModule)
   },
+  {
+    path: 'pending-req',
+    loadChildren: () => import('./pending-req/pending-req.module').then( m => m.PendingReqPageModule)
+  },
+  {
+    path: 'closed-req',
+    loadChildren: () => import('./closed-req/closed-req.module').then( m => m.ClosedReqPageModule)
+  },
 ];
 
 @NgModule({

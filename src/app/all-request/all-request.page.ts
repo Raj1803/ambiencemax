@@ -12,7 +12,7 @@ export class AllRequestPage implements OnInit, OnDestroy {
   displayedColumns: string[] = ['req_id', 'Requesttitle', 'Request Type', 'Requester Id' ,
   'Request City', 'requestinitdate'  , 'status',  'view' , 'Approve'];
  
-  public dataSource = this.UserDataService.desiredRequests;
+  public dataSource = this.UserDataService.allRequests;
 
   updatedData = [];
 
@@ -21,6 +21,8 @@ export class AllRequestPage implements OnInit, OnDestroy {
   ngOnInit() {
 
     console.log(this.dataSource); 
+
+
   }
 
   ngOnDestroy() {

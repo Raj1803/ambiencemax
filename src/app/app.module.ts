@@ -13,8 +13,6 @@ import { UserDataService } from './Services/UserDataService';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatTableModule  } from '@angular/material/table';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +23,7 @@ import { MatTableModule  } from '@angular/material/table';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule,
-    MatTableModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,
