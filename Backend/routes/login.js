@@ -117,7 +117,8 @@ router.post("/login", (req, res) => {
                           JSON.stringify({
                             result: "passed",
                             user_id: user_id,
-                            req_data: reqData.slice(0,10),
+                            // req_data: reqData.slice(0,10),
+                            req_data: reqData,
                             role_id : role_id,
                             req_stats: req_stats,
                             h_id: h_id

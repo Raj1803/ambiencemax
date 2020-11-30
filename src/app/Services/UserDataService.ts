@@ -90,6 +90,7 @@ export class UserDataService {
   fetchReqStat() {
     return this.reqStatsSubject.asObservable();
   }
+  
   authenticateUser(email: string, password: string) {
     this.email = email;
     this.password  = password;

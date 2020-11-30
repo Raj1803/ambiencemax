@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'closed-req',
     loadChildren: () => import('./closed-req/closed-req.module').then( m => m.ClosedReqPageModule)
   },
+  {
+    path: 'open-req',
+    loadChildren: () => import('./open-req/open-req.module').then( m => m.OpenReqPageModule)
+  },
 ];
 
 @NgModule({
