@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { UserDataService } from './Services/UserDataService';
 
+import { RequestService } from './Services/RequestService';
+
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -28,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     UserDataService,
+    RequestService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

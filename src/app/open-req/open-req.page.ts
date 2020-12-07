@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '../Services/UserDataService';
+import { RequestService } from '../Services/RequestService';
 
 @Component({
   selector: 'app-open-req',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpenReqPage implements OnInit {
 
-  constructor() { }
+  public dataSource;
+
+  constructor(public UserDataService: UserDataService, private RequestService: RequestService) { }
 
   ngOnInit() {
+
+    let response:any = this.RequestService.fetchopenReq().subscribe((response:any)=>{
+
+      this.dataSource = response.req_data;
+
+    });
+
+    console.log(this.dataSource);
+
   }
 
 }

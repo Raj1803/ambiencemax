@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { UserDataService } from '../Services/UserDataService';
-
+import { RequestService } from '../Services/RequestService';
+ 
 @Component({
   selector: 'app-pending-req',
   templateUrl: './pending-req.page.html',
@@ -8,14 +9,26 @@ import { UserDataService } from '../Services/UserDataService';
 })
 export class PendingReqPage implements OnInit {
 
-  public dataSource = this.UserDataService.pendingRequests;
+  // public dataSource = this.UserDataService.pendingRequests;
+  public dataSource;
 
   updatedData = [];
 
-  constructor(public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef, private RequestService: RequestService) { }
 
   ngOnInit() {
+
+
+    let response:any = this.RequestService.fetchpendingReq().subscribe((response:any)=>{
+
+      this.dataSource = response.req_data;
+
+    });
+
     console.log(this.dataSource); 
+
+
+
 
     if(this.UserDataService.userId==1){
 
