@@ -35,6 +35,26 @@ const routes: Routes = [
     path: 'open-req',
     loadChildren: () => import('./open-req/open-req.module').then( m => m.OpenReqPageModule)
   },
+  // {
+  //   path: 'view-request',
+  //   loadChildren: () => import('./view-request/view-request.module').then( m => m.ViewRequestPageModule)
+  // },
+  // {
+  //   path: 'view-status',
+  //   loadChildren: () => import('./view-status/view-status.module').then( m => m.ViewStatusPageModule)
+  // },
+  {
+    path: 'open-view-request',
+    loadChildren: () => import('./open-view-request/open-view-request.module').then( m => m.OpenViewRequestPageModule)
+  },
+  {
+    path: 'view-status-requests',
+    loadChildren: () => import('./view-status-requests/view-status-requests.module').then( m => m.ViewStatusRequestsPageModule)
+  },
+  // {
+  //   path: 'view-logs',
+  //   loadChildren: () => import('./view-logs/view-logs.module').then( m => m.ViewLogsPageModule)
+  // },
 ];
 
 @NgModule({

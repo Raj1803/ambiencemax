@@ -24,3 +24,26 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.card-alert {
+    width: 100px;
+    height: 100px;
+}
+
+.center{
+    text-align: center;
+}
+
+#card_backgound_request{
+    background-color: rgba(165, 164, 164, 0.3);
+}
+
+.grad{
+    // --background: linear-gradient(to right, rgb(0,0,70), rgb(28,181,224)) !important;
+    --background: rgb(146, 33, 146);
+   
+ 
+     // background: linear-gradient(to right, #000046, #1cb5e0);
+   
+   }

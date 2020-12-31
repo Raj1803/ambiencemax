@@ -1,28 +1,46 @@
 <ion-app>
-  <ion-menu side="start" menuId="dashboard" content-id="dashboard">
+  <ion-menu type="push" side="start" menuId="dashboard" content-id="dashboard" [swipeGesture]="false">
     
+    <ion-header>
+      <ion-toolbar class="text-center">
+        
+        <img
+        (click)="makealert()"
+        style="margin-top: 10px;"
+        class="text-center"
+        src="../assets/user_icon.png"
+        width="100"
+        height="100"/>
+
+        <h5 style="color: white;">{{ user_id }}</h5>
+
+      </ion-toolbar>
+    </ion-header>
+
   <ion-content>
     <ion-list>
+
       <ion-menu-toggle>
-        <ion-item routerLink="/dashboard" style="color: white;">Dashboard</ion-item>
+        <ion-item  routerLink="/dashboard" style="color: white;">Dashboard</ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
         <ion-item routerLink="/add-req" style="color: white;">New Request</ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item  routerLink="/all-request" style="color: white;">All Requests</ion-item>
-      </ion-menu-toggle>
-      
-      <ion-menu-toggle>
-        <ion-item  routerLink="/open-req" style="color: white;">Open Requests</ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item routerLink="/pending-req" style="color: white;">Pending Requests</ion-item>
       </ion-menu-toggle>
-      
+
+      <ion-menu-toggle>
+        <ion-item  routerLink="/open-req" style="color: white;">Open Requests</ion-item>
+      </ion-menu-toggle>
+
       <ion-menu-toggle>
         <ion-item routerLink="/closed-req" style="color: white;">Closed Requests</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item  routerLink="/all-request" style="color: white;">All Requests</ion-item>
       </ion-menu-toggle>
       
       <ion-item style="color: white;">Logout</ion-item>

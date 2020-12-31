@@ -8,12 +8,7 @@
   transform: translateY(-50%);
 }
 
-.grad{
-  --background: linear-gradient(to right, rgb(0,0,70), rgb(28,181,224)) !important;
 
-  // background: linear-gradient(to right, #000046, #1cb5e0);
-
-}
 
 #login-container{
   
@@ -35,6 +30,16 @@
   
 }
 
+ion-menu{
+  ion-content{
+      --ion-background-color: rgb(0,0,70)
+  }
+}
+
+ion-item.item-has-focus > ion-label{
+  color: rgb(235, 153, 0)  !important;
+}
+
 .card{
   position: absolute;
   left: 0;
@@ -48,17 +53,27 @@
 }
 
 .bgimg{
-  --background: url('/assets/bgimg.png') repeat;
-  background-color:rgba(86, 123, 146, 0.445) ;
+  --background:rgba(102, 0, 102, 0.1) ;
 }
 
 #item{
   border-radius: 5px;
   width: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+  
+}
+
+#itempassword{
+  border-radius: 5px;
+  width: auto;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #emailhelp{
-  margin-left: auto;
+  margin-left: 25px;
 }
 
 #container strong {

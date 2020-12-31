@@ -10,12 +10,17 @@ import { RequestService } from '../Services/RequestService';
 export class OpenReqPage implements OnInit {
 
   public dataSource;
+  public userId;
+  public filterTerm: string;
 
-  constructor(public UserDataService: UserDataService, private RequestService: RequestService) { }
+  constructor(public UserDataService: UserDataService, public RequestService: RequestService) { }
 
   ngOnInit() {
 
-    let response:any = this.RequestService.fetchopenReq().subscribe((response:any)=>{
+    this.userId = JSON.parse(localStorage.getItem('userId'));
+      console.log(this.userId);
+
+    let response:any = this.RequestService.fetchopenReq(this.userId).subscribe((response:any)=>{
 
       this.dataSource = response.req_data;
 

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AllRequestPageRoutingModule } from './all-request-routing.module';
 
 import { AllRequestPage } from './all-request.page';
@@ -13,6 +15,7 @@ import { AllRequestPage } from './all-request.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    Ng2SearchPipeModule,
     AllRequestPageRoutingModule
   ],
   declarations: [AllRequestPage]

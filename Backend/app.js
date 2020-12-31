@@ -5,6 +5,9 @@ const approveRoutes = require('./routes/approve');
 const addRequests = require('./routes/addRequests');
 const addWorkFlow = require('./routes/addWorkFlow');
 const requestFetch = require('./routes/requests');
+const viewRequest=require('./routes/viewRequest');
+const dashboardRoute=require('./routes/dashboard');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -268,8 +271,10 @@ app.get("/" , (req,res,next)=>{
 // })
 
 app.use(loginRoutes);
+app.use(dashboardRoute);
 app.use(approveRoutes);
 app.use(addRequests);
 app.use(addWorkFlow);
+app.use(viewRequest);
 app.use(requestFetch);
 module.exports = app;

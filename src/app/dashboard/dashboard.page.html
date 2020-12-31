@@ -8,12 +8,6 @@
       <ion-menu-button menu="dashboard"></ion-menu-button>
     </ion-buttons> 
 
-    <!-- <ion-buttons slot="end" style="color: white;">
-      <ion-button (click)="presentPopup($event)">
-        <ion-icon name="ellipsis-vertical"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
-
     <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
 
   </ion-toolbar>
@@ -21,17 +15,70 @@
 
 
 
-<ion-content [fullscreen]="true" class="bgimg">
+<ion-content [fullscreen]="true">
+
+  <div style="margin-top: 10px;" class="row">
+
+    <div class="col" style="width: 50%;">
+
+    <ion-card (click)="topending()" >
+      
+        <h5 style="text-align: center;">Pending - {{ Pending }} </h5>
+      
+    
+      <!-- <ion-card-content>
+        <h2>      
+          {{ Pending }}
+        </h2>
+  
+      </ion-card-content> -->
+  
+    </ion-card>
+
+  </div>
+
+  <div class="col" style="width: 50%;">
+
+    <ion-card (click)="toclose()">
+      
+        <h5 style="text-align: center;">Closed - {{ Closed }} </h5>
+      
+    
+      <!-- <ion-card-content>
+        <h2>      
+          {{ Closed }}
+        </h2> -->
+  
+      <!-- </ion-card-content> -->
+  
+    </ion-card>
+  
+  </div>
+  
+  </div>
+
+  
+
+  <div *ngIf="this.UsrDataService.userRole !== 1">
+
+    <ion-card style="height: 50px;" (click)="toopen()" >
+      <h5 style="text-align: center;">
+        Open - {{ Open }}
+      </h5>
+  
+    </ion-card>
+  
+  </div>
 
   <div>
 
-  <ion-card id="chart_card">
+  <ion-card style="padding: 5px;" >
 
-      <ion-toolbar>
+      <!-- <ion-toolbar>
         <ion-title size="large">Total Request : {{ All }}</ion-title>
-      </ion-toolbar>
+      </ion-toolbar> -->
 
-      <div class="chart-wrapper" *ngIf="ChartType === 'bar'" >
+      <div class="chart-wrapper" >
 
         <canvas baseChart
         [datasets]="barChartData"
@@ -42,98 +89,30 @@
         [chartType]="barChartType">
       </canvas>
 
-      <div class="center">
-        <ion-button color="Light" id="button_margin" (click)="ChartType = 'doughnut'">Change Chart</ion-button>
-      </div>
+      
 
       </div>
+      
 
-      <div class="chart-wrapper" *ngIf="ChartType === 'doughnut'" >
+      
+
+  </ion-card>
+
+  <ion-card style="padding: 5px;">
+  <div class="chart-wrapper"  >
 
       
             <canvas baseChart
             [data]="doughnutChartData"
             [labels]="doughnutChartLabels"
+            [colors]="chartColors"
             [chartType]="doughnutChartType">
           </canvas>
-        
-
-      <div class="center">
-        <ion-button color="Light" id="button_margin" (click)="ChartType = 'bar'">Change Chart</ion-button>
-      </div>
 
       </div>
-      
 
-      
+    </ion-card>
 
-  </ion-card>
-
-</div>
-
-<div>
-
-  <ion-card id="chart_card">
-    <ion-card-header>
-      <ion-card-title>Pending Requests</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <h2>      
-        {{ Pending }}
-      </h2>
-
-      <ion-button>
-        View All
-      </ion-button>
-
-    </ion-card-content>
-
-  </ion-card>
-
-</div>
-
-<div *ngIf="this.UsrDataService.userRole !== 1">
-
-  <ion-card id="chart_card">
-    <ion-card-header>
-      <ion-card-title>Open Requests</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <h2>      
-        {{ Open }}
-      </h2>
-
-      <ion-button>
-        View All
-      </ion-button>
-
-    </ion-card-content>
-
-  </ion-card>
-
-</div>
-
-<div>
-
-  <ion-card id="chart_card">
-    <ion-card-header>
-      <ion-card-title>Closed Requests</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <h2>      
-        {{ Closed }}
-      </h2>
-
-      <ion-button>
-        View All
-      </ion-button>
-
-    </ion-card-content>
-
-  </ion-card>
 
 </div>
 

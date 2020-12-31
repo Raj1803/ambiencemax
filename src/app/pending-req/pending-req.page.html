@@ -4,7 +4,7 @@
   <ion-toolbar class="grad">
 
     <ion-buttons slot="start" style="color: white;">
-      <ion-menu-button menu="dashboard"></ion-menu-button>
+      <ion-back-button ></ion-back-button>
     </ion-buttons>
 
     <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
@@ -13,43 +13,61 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true" class="bgimg">
+<ion-content [fullscreen]="true">
 
+ 
+  <h5 style="text-align: center; color: black; font-size: 22px;">Pending requests</h5>
+
+  <ion-searchbar style="--clear-button-color:rgb(255, 153, 0); --icon-color:rgb(255, 153, 0);" placeholder="Search Title here.." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+   
   <ion-card>
+  
 
-    <ion-card-header>
-      <h5 style="text-align: center;">Pending requests</h5>
-    </ion-card-header>
-    
     <ion-row class="header-row">
-
-    <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;">
-      Request Title
-    </ion-col>  
-
-    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
-      Requester Id
-    </ion-col> 
-
+      <ion-col  style="font-size: 18px; text-align: center; width: 50%; color: black">
+        Requester Id
+      </ion-col> 
+  
+      <ion-col  style="font-size: 18px; width: 50%;color: black;">
+        Request Title
+      </ion-col> 
 
   </ion-row>
 
-  <ion-row *ngFor="let row of dataSource; let i = index;">
+  </ion-card>
 
 
-    <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;">
-      {{ row.req_title }}
-    </ion-col>  
+  <ion-card *ngFor="let row of dataSource | filter: filterTerm ; let i = index;">
 
-    <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
-      {{ row.req_initiator_id }}
-    </ion-col>
+    <ion-row *ngIf = "i % 2 === 0" id="card_backgound_request">  
 
-    <ion-col size="2" size-md="4" size-lg="2">
+      <ion-col style="font-size: 15px; text-align: center; width: 50%;">
+        {{ row.req_initiator_id }}
+      </ion-col>
+  
+      <ion-col style="font-size: 15px; width: 50%;">
+        {{ row.req_title }}
+      </ion-col>
+  
+    </ion-row>
+
+
+    <ion-row *ngIf = "i % 2 === 1">
+
+      <ion-col  style="font-size: 15px; text-align: center; width: 50%;">
+        {{ row.req_initiator_id }}
+      </ion-col> 
+  
+      <ion-col  style="font-size: 15px; width: 50%;">
+        {{ row.req_title }}
+      </ion-col>
+
+    <!-- <ion-col size="2" size-md="4" size-lg="2">
       <button
       color = "warn"
       *ngIf = "UserDataService.userRole !== 8"
-      (click) = 'UserDataService.viewReq = row; UserDataService.getWorkFlow(row.req_id)' >
+      (click) = 'RequestService.viewReq = row; RequestService.ReqId = row.req_id'
+      routerLink="/view-request" >
         View
       </button>
     </ion-col>
@@ -57,14 +75,16 @@
     <ion-col size="2" size-md="4" size-lg="2">
       <button
       color = "accent"
-      (click) = 'UserDataService.viewReq = row'>
+      (click) = 'RequestService.viewReq = row; RequestService.getViewStatus(row.req_id)'
+      routerLink = "/view-status">
        View Status
       </button>
-    </ion-col>
+    </ion-col> -->
 
   </ion-row>
 
-</ion-card>
+
+  </ion-card>
 
 
 

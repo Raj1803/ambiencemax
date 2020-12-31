@@ -15,15 +15,20 @@ export class AllRequestPage implements OnInit, OnDestroy {
  
  // public dataSource = this.UserDataService.allRequests;
   public dataSource;
+  public userId;
+  public filterTerm: string;
 
   updatedData = [];
 
-  constructor( public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef , private RequestService: RequestService) { }
+  constructor( public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef , public RequestService: RequestService) { }
 
   ngOnInit() { 
     //this.dataSource = this.RequestService.allReqs();
 
-    let response:any = this.RequestService.fetchaallReq().subscribe((response:any)=>{
+    this.userId = JSON.parse(localStorage.getItem('userId'));
+      console.log(this.userId);
+
+    let response:any = this.RequestService.fetchaallReq(this.userId).subscribe((response:any)=>{
 
       this.dataSource = response.req_data;
 

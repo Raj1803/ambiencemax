@@ -9,15 +9,20 @@ import { RequestService } from '../Services/RequestService';
 })
 export class ClosedReqPage implements OnInit {
 
-  public dataSource = this.UserDataService.closedRequests;
+  public dataSource;
+  public userId;
+  public filterTerm: string;
 
   updatedData = [];
 
-  constructor(public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef, private RequestService: RequestService) { }
+  constructor(public UserDataService: UserDataService, private changeDetectorRefs: ChangeDetectorRef, public RequestService: RequestService) { }
 
   ngOnInit() {
 
-    let response:any = this.RequestService.fetchclosedReq().subscribe((response:any)=>{
+    this.userId = JSON.parse(localStorage.getItem('userId'));
+      console.log(this.userId);
+
+    let response:any = this.RequestService.fetchclosedReq(this.userId).subscribe((response:any)=>{
 
       this.dataSource = response.req_data;
 

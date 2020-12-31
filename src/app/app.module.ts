@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CustomFormsModule } from 'ng2-validation'
+import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { UserDataService } from './Services/UserDataService';
 
@@ -25,7 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomFormsModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ],
   providers: [
     StatusBar,

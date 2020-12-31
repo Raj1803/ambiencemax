@@ -3,6 +3,8 @@ import { UserDataService } from '../Services/UserDataService';
 import { ReqSchema } from '../Services/ReqSchema';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { CustomFormsModule, CustomValidators } from 'ng2-validation'
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-req',
@@ -11,13 +13,21 @@ import { ToastController } from '@ionic/angular';
 })
 export class AddReqPage implements OnInit {
 
+  form: FormControl;
+
   constructor(
     public UserDataService: UserDataService, 
     private router: Router,
-    public toastController: ToastController) { }
+    public toastController: ToastController) {
+
+      this.form = new FormControl({
+        inputbudget:new FormControl('',CustomValidators.min(1))
+      });
+
+     }
 
   Approvers = [];
-  num = 0;
+  num = 1;
 
   currReq: ReqSchema = {
     req_date: '' ,
@@ -49,6 +59,10 @@ export class AddReqPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  todashboard(){
+    this.router.navigate(['/dashboard']);
   }
 
 

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { OpenReqPageRoutingModule } from './open-req-routing.module';
 
 import { OpenReqPage } from './open-req.page';
@@ -13,6 +15,7 @@ import { OpenReqPage } from './open-req.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    Ng2SearchPipeModule,
     OpenReqPageRoutingModule
   ],
   declarations: [OpenReqPage]
