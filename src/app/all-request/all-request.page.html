@@ -26,11 +26,11 @@
 
       
 
-    <ion-col  style="font-size: 18px; text-align: center; width: 50%; color: black">
+    <ion-col  style="font-size: 18px; text-align: center; width: 50%; color: black; font-weight: bold;">
       Requester Id
     </ion-col> 
 
-    <ion-col  style="font-size: 18px; width: 50%;color: black;">
+    <ion-col  style="font-size: 18px; width: 50%;color: black; font-weight: bold;">
       Request Title
     </ion-col>  
 
@@ -42,17 +42,16 @@
   <ion-card 
     ion-item *ngFor="let row of dataSource | filter: filterTerm; let i = index;"
     (click) = 'RequestService.viewReq = row; RequestService.ReqId = row.req_id; RequestService.getViewStatus(row.req_id)'
-    routerLink="/view-status-requests"
-    >
+    routerLink="/view-status-requests" >
 
   
     <ion-row *ngIf = "i % 2 === 0" id="card_backgound_request">  
 
-      <ion-col style="font-size: 15px; text-align: center; width: 50%;">
+      <ion-col style="font-size: 15px; text-align: center; width: 50%; color: black;">
         {{ row.req_initiator_id }}
       </ion-col>
   
-      <ion-col style="font-size: 15px; width: 50%;">
+      <ion-col style="font-size: 15px; width: 50%; color: black;">
         {{ row.req_title }}
       </ion-col>
   
@@ -60,11 +59,11 @@
 
   <ion-row *ngIf = "i % 2 === 1">
 
-    <ion-col  style="font-size: 15px; text-align: center; width: 50%;">
+    <ion-col  style="font-size: 15px; text-align: center; width: 50%; color: black;">
       {{ row.req_initiator_id }}
     </ion-col> 
 
-    <ion-col  style="font-size: 15px; width: 50%;">
+    <ion-col  style="font-size: 15px; width: 50%; color: black;">
       {{ row.req_title }}
     </ion-col>  
 

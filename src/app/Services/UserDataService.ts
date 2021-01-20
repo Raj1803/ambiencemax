@@ -41,7 +41,9 @@ export class UserDataService {
   Data: UserData;
   userId = null;
   userRole = null;
+  ReqId=null;
   w_id=null;
+  userRole1=0;
   isPending = false;
   public fetchedReqs: ReqSchema[];
   public fetchedReqsUpdated = new Subject<ReqSchema[]>();
@@ -65,6 +67,9 @@ export class UserDataService {
   public underNegRequests: ReqSchema[] = [];
   public desiredRequests: ReqSchema[] = [];
   public Workflow = [];
+
+  action_taken_by="";
+
   public reqTypeData: {
     'Pending': number,
     'Closed': number,
@@ -212,91 +217,162 @@ export class UserDataService {
   }}
   return this.Workflow;
   }
+
   decideApprove() {
-    console.log(this.userRole.toString());
-    if ((this.Workflow.indexOf( this.userRole.toString() ) === 0 && this.viewReq.req_level === 1 )
-    || this.Workflow[this.Workflow.indexOf( this.userRole.toString() ) - 1] - this.userRole === this.viewReq.req_level - this.userRole) {
-      this.toBeApproved = true;
-      console.log(this.toBeApproved);
+
+    console.log("User Role:",this.userRole.toString());
+      console.log("w1",this.Workflow.indexOf( this.userRole.toString()));
+      console.log("w2",this.viewReq.req_level);
+      console.log("user_r",this.userRole>=1);
+      this.userRole1=this.Workflow.indexOf( this.userRole.toString());
+      this.userRole1=this.Workflow[this.userRole1+1];
+      console.log("next user Role",this.userRole1);
+      if (this.Workflow.indexOf( this.userRole.toString())==0 || (this.Workflow.indexOf( this.userRole.toString()))) {
+        this.toBeApproved = true;
+        console.log(this.toBeApproved);
+        localStorage.setItem('toBeApproved', JSON.stringify(this.toBeApproved));
+        console.log(JSON.parse(localStorage.getItem('toBeApproved')));
+        this.message = '';
+        this.viewReq.req_level = this.userRole;
+      }
+      if ( this.viewReq.req_level + 1 === this.userRole || this.userRole === 1 ) {
+        this.message = '';
+      } else if (this.viewReq.req_level >= this.userRole) {
+        this.message = 'You have already acted on this request';
+      } else if (this.viewReq.req_level < this.userRole) {
+        this.message = 'This request is still in the Open queue of previous aprrovers ';
+      }
       localStorage.setItem('toBeApproved', JSON.stringify(this.toBeApproved));
-      console.log(JSON.parse(localStorage.getItem('toBeApproved')));
-      this.message = '';
-      this.viewReq.req_level = this.userRole;
-    }
-    if ( this.viewReq.req_level + 1 === this.userRole || this.userRole === 1 ) {
-      this.message = '';
-    } else if (this.viewReq.req_level >= this.userRole) {
-      this.message = 'You have already acted on this request';
-    } else if (this.viewReq.req_level < this.userRole) {
-      this.message = 'This request is still in the Open queue of previous aprrovers ';
-    }
-    localStorage.setItem('toBeApproved', JSON.stringify(this.toBeApproved));
-    localStorage.setItem('message', JSON.stringify(this.message));
+      localStorage.setItem('message', JSON.stringify(this.message));
+
+    // console.log(this.userRole.toString());
+    // if ((this.Workflow.indexOf( this.userRole.toString() ) === 0 && this.viewReq.req_level === 1 )
+    // || this.Workflow[this.Workflow.indexOf( this.userRole.toString() ) - 1] - this.userRole === this.viewReq.req_level - this.userRole) {
+    //   this.toBeApproved = true;
+    //   console.log(this.toBeApproved);
+    //   localStorage.setItem('toBeApproved', JSON.stringify(this.toBeApproved));
+    //   console.log(JSON.parse(localStorage.getItem('toBeApproved')));
+    //   this.message = '';
+    //   this.viewReq.req_level = this.userRole;
+    // }
+    // if ( this.viewReq.req_level + 1 === this.userRole || this.userRole === 1 ) {
+    //   this.message = '';
+    // } else if (this.viewReq.req_level >= this.userRole) {
+    //   this.message = 'You have already acted on this request';
+    // } else if (this.viewReq.req_level < this.userRole) {
+    //   this.message = 'This request is still in the Open queue of previous aprrovers ';
+    // }
+    // localStorage.setItem('toBeApproved', JSON.stringify(this.toBeApproved));
+    // localStorage.setItem('message', JSON.stringify(this.message));
+
   }
 
   Approved(reqId: number) {
-    this.http.post('http://localhost:3000/approve', {req_id: reqId , userRole: this.userRole})
-    .subscribe((ResData) => {
-      console.log(ResData);
-    });
-    if ( this.Workflow.indexOf(this.userRole.toString()) === this.Workflow.length - 1 ) {
-      this.http.post('http://localhost:3000/closeReq', {req_id: reqId })
-    .subscribe((ResData) => {
-      console.log(ResData);
-    });
-    }
 
-    this.openRequests.forEach((e , index) => {
-      if (e.req_id === this.viewReq.req_id) {
-        if ( this.Workflow.indexOf(this.userRole.toString()) === this.Workflow.length - 1 ) {
-          e.req_level = this.userRole;
-          this.closedRequests.push(e);
-          this.reqStats.Closed += 1;
-        }
-        this.reqStats.Open -= 1;
-        this.Data.reqStats.Open = this.reqStats.Open;
-        localStorage.setItem('userData', JSON.stringify(this.Data));
-        this.openRequests.splice(index, 1);
-        console.log(this.pendingRequests);
+    console.log("req id.....",reqId);
+      console.log("Next User Role.....:",this.userRole1);
+      this.http.post('http://localhost:3000/approve', {req_id: reqId , userRole: this.userRole1})
+      .subscribe((ResData) => {
+        console.log("In Approved Method",ResData);
+      });
+
+      if ( this.Workflow.indexOf(this.userRole.toString()) === this.Workflow.length - 1 ) {
+        this.http.post('http://localhost:3000/closeReq', {req_id: reqId })
+      .subscribe((ResData) => {
+        console.log(ResData);
+      });
       }
-    });
-    this.allRequests.forEach((e) => {
-      if (e.req_id === this.viewReq.req_id) {
-        e.req_level = this.userRole;
-      }
-    });
-    this.pendingRequests.forEach((e) => {
-      if (e.req_id === this.viewReq.req_id) {
-        e.req_level = this.userRole;
-      }
-    });
-    console.log(this.allRequests);
-    console.log('User Data Service Main : ' + this.main);
-    if (this.main === 'Pending') {
-      this.desiredRequests = this.pendingRequests;
-      console.log('Pending Called');
-    // this.isPending = true;
-    } else if (this.main === 'all') {
-    // this.isPending = false;
-      this.desiredRequests = this.allRequests;
-      console.log('All Called');
-    } else if (this.main === 'closed') {
-    // this.isPending = false;
-      this.desiredRequests = this.closedRequests;
-      console.log('Closed Called');
-    } else if (this.main === 'open') {
-      // this.isPending = false;
-      this.desiredRequests = this.openRequests;
-      console.log('Closed Called');
-    }
-    this.desiredReqSub.next(this.desiredRequests);
-    this.toBeApproved = false;
+      this.toBeApproved = false;
+      console.log("in approvelog",reqId,"and userRole is",this.userRole);
+     this.action_taken_by=this.RoleMap[this.userRole-1];
+      console.log("this.action_taken_by",this.action_taken_by);
+      console.log("user ....Role",this.userRole,this.ReqId);
+      this.http.post('http://localhost:5600/addLog', {req_id: reqId , userRole: this.userRole,action_taken_by:this.action_taken_by})
+      .subscribe((ResData) => {
+        console.log("In add log",ResData);
+      });
+
+    // this.http.post('http://localhost:3000/approve', {req_id: reqId , userRole: this.userRole})
+    // .subscribe((ResData) => {
+    //   console.log(ResData);
+    // });
+    // if ( this.Workflow.indexOf(this.userRole.toString()) === this.Workflow.length - 1 ) {
+    //   this.http.post('http://localhost:3000/closeReq', {req_id: reqId })
+    // .subscribe((ResData) => {
+    //   console.log(ResData);
+    // });
+    // }
+
+    // this.openRequests.forEach((e , index) => {
+    //   if (e.req_id === this.viewReq.req_id) {
+    //     if ( this.Workflow.indexOf(this.userRole.toString()) === this.Workflow.length - 1 ) {
+    //       e.req_level = this.userRole;
+    //       this.closedRequests.push(e);
+    //       this.reqStats.Closed += 1;
+    //     }
+    //     this.reqStats.Open -= 1;
+    //     this.Data.reqStats.Open = this.reqStats.Open;
+    //     localStorage.setItem('userData', JSON.stringify(this.Data));
+    //     this.openRequests.splice(index, 1);
+    //     console.log(this.pendingRequests);
+    //   }
+    // });
+    // this.allRequests.forEach((e) => {
+    //   if (e.req_id === this.viewReq.req_id) {
+    //     e.req_level = this.userRole;
+    //   }
+    // });
+    // this.pendingRequests.forEach((e) => {
+    //   if (e.req_id === this.viewReq.req_id) {
+    //     e.req_level = this.userRole;
+    //   }
+    // });
+    // console.log(this.allRequests);
+    // console.log('User Data Service Main : ' + this.main);
+    // if (this.main === 'Pending') {
+    //   this.desiredRequests = this.pendingRequests;
+    //   console.log('Pending Called');
+    // // this.isPending = true;
+    // } else if (this.main === 'all') {
+    // // this.isPending = false;
+    //   this.desiredRequests = this.allRequests;
+    //   console.log('All Called');
+    // } else if (this.main === 'closed') {
+    // // this.isPending = false;
+    //   this.desiredRequests = this.closedRequests;
+    //   console.log('Closed Called');
+    // } else if (this.main === 'open') {
+    //   // this.isPending = false;
+    //   this.desiredRequests = this.openRequests;
+    //   console.log('Closed Called');
+    // }
+    // this.desiredReqSub.next(this.desiredRequests);
+    // this.toBeApproved = false;
+
+
   }
-  addRequest(newReq: ReqSchema) {
-    this.http.post('http://localhost:3000/newReq', {request: newReq}).subscribe(() => {
+
+  addRequest(newReq: ReqSchema,filepath) {
+    this.http.post('http://localhost:3000/newReq', {request: newReq}).subscribe((data:ReqSchema) => {
       console.log('Request Submitted!');
-      
+      this.addToLog(JSON.parse(JSON.stringify(data)).id,filepath);
     });
+  }
+
+  addToLog(newReqId, filepath) {
+    for (let i = 0; i < filepath.length; i++) {
+      filepath[i] = filepath[i];
+      this.http.post('http://localhost:3000/fileUpload', { req_id: newReqId, filepath: filepath[i] })
+        .subscribe((ResData) => {
+          console.log("file upload data");
+          console.log(ResData);
+        });
+    }
+    this.http.post('http://localhost:5600/addLogNewReq', { req_id: newReqId, userRole: this.userRole })
+      .subscribe((ResData) => {
+        console.log("new request data");
+        console.log(ResData);
+      });
   }
   
   // ReqClassification(Requests: ReqSchema[]) {

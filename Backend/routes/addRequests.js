@@ -2,7 +2,33 @@ let express = require("express"),
   router = express.Router(),
   con = require("../mysql_config/config");
 
-  router.post("/newReq" , (req,res) =>{
+
+
+
+  router.post("/fileUpload",(req,res) =>{
+    reqId = req.body.req_id;
+    filepath=req.body.filepath;
+    console.log("\\\\\\\\\\/////",reqId,filepath);
+    sql1 = `insert into uploadfile (files,req_id) values ('${filepath}','${reqId}')`
+      con.query(sql1, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(result);
+      res.send(
+        JSON.stringify({
+          result: "passed",
+          id:res.insertId
+        })
+      );
+    }
+  })
+  });
+
+
+
+  router.post("/newReq" , (req,response) =>{
 
     request = req.body.request;
     req_title = request.req_title;
@@ -46,7 +72,7 @@ let express = require("express"),
           console.log(res);
           console.log(res.insertId,"req_id");
           // userDataService.addReqToLog(res.insertId);
-          response.send(JSON.stringify({id:res.insertId}))
+          response.send(JSON.stringify({id:res.insertId}));
         }
       })
     }

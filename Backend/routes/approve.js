@@ -4,17 +4,32 @@ let express = require("express"),
   con = require("../mysql_config/config");
 
   router.post("/approve",(req,res)=>{
+
     role = req.body.userRole;
     reqId = req.body.req_id;
+    console.log('role....', role);
+    console.log('reqId......', reqId);
     sql = `update requests set req_level = '${role}' where req_id = '${reqId}';`
-    con.query(sql,function(err,result){
-      if(err){
+    con.query(sql, function (err, result) {
+      if (err) {
         console.log(err);
-      }else{
+      } else {
         console.log(result);
+        res.send(result);
       }
-    })
-  })
+  });
+
+    // role = req.body.userRole;
+    // reqId = req.body.req_id;
+    // sql = `update requests set req_level = '${role}' where req_id = '${reqId}';`
+    // con.query(sql,function(err,result){
+    //   if(err){
+    //     console.log(err);
+    //   }else{
+    //     console.log(result);
+    //   }
+    // })
+  });
 
   router.post("/workflow",(req,res)=>{
     reqId = req.body.req_id;
@@ -28,7 +43,7 @@ let express = require("express"),
         res.send(result);
       }
     })
-  })
+  });
 
   router.post("/closeReq",(req,res)=>{
     reqId = req.body.req_id;

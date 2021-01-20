@@ -1,52 +1,37 @@
-<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 
-<ion-header [translucent]="true">
-  <ion-toolbar class="grad">
-
-    <ion-buttons slot="start" style="color: white;">
-      <ion-back-button ></ion-back-button>
-    </ion-buttons>
-
-    <ion-title style="color: white; align-items: center;">AmbienceMax</ion-title>
-
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
 
 
-<ion-content [fullscreen]="true" class="bgimg">
+  <ion-list lines="full">
+    
+    <ion-item>
 
-  <ion-card>
-    <ion-card-header>
-      <h5 style="text-align: center;">Approval Status</h5>
-    </ion-card-header>
-
-    <hr>
-
-    <ion-row class="header-row">
-
-      <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;">
+      <ion-col size="3" size-md="4" size-lg="2" style="font-size: 18px; font-weight: bold;">
         Role Id
       </ion-col>  
   
-      <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;">
+      <ion-col size="5" size-md="4" size-lg="2" style="font-size: 18px; font-weight: bold;">
         Designation
       </ion-col> 
 
-      <ion-col size="5" size-md="4" size-lg="2" style="font-size: 10px;">
+      <ion-col size-md="4" size-lg="2" style="font-size: 18px; font-weight: bold;">
         Status
       </ion-col> 
   
-    </ion-row>
+    </ion-item>
+  
 
-    <ion-row *ngFor="let role of this.RequestService.role1; let i = index;">
+    <ion-item *ngFor="let role of this.RequestService.role1; let i = index;">
 
-      <ion-col size="2" size-md="4" size-lg="2" style="font-size: 10px;" *ngIf= "i>=0">
+    
+
+      <ion-col size="3" size-md="4" size-lg="2" style="font-size: 15px;" *ngIf= "i>=0">
 
         {{ role.role_id }}
 
       </ion-col>
 
-      <ion-col size="4" size-md="4" size-lg="2" style="font-size: 10px;" *ngIf= "i>=0">
+      <ion-col size="5" size-md="4" size-lg="2" style="font-size: 15px;" *ngIf= "i>=0">
 
         {{ role.role_name }}
 
@@ -54,25 +39,24 @@
 
       <ion-col *ngIf = "role.role_id >= this.RequestService.viewReq.req_level">
 
-        <span  style="background-color: brown; border-radius:10px; color:white; font-size: 10px;">
+        <ion-text  style="background-color:brown; border-radius:5px; color:white; font-size: 15px; padding-left: 5px; padding-right: 5px;">
           {{RequestService.viewReq.req_status}}
-        </span>
+        </ion-text>
 
       </ion-col>
 
       <ion-col *ngIf = "role.role_id<this.RequestService.viewReq.req_level">
 
-        <span  style="background-color: green; border-radius:10px; color:white; font-size: 10px;">
+        <ion-text  style="background-color: green; border-radius:5px; color:white; font-size: 15px; padding-left: 5px; padding-right: 5px;">
           Approved
-        </span>
+        </ion-text>
 
       </ion-col>
 
-    </ion-row>
 
+  </ion-item>
 
-
-  </ion-card>
+  </ion-list>
 
 
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '../Services/UserDataService';
 import { ReqSchema } from '../Services/ReqSchema';
 import { RequestService } from '../Services/RequestService';
 
@@ -20,7 +21,7 @@ export class OpenViewRequestPage implements OnInit {
   public req_status;
   public last_approve;
 
-  constructor(public RequestService: RequestService) {
+  constructor(public RequestService: RequestService, public userDataService: UserDataService ) {
     // this.view = RequestService.viewReq;
    }
 
